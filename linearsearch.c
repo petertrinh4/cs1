@@ -1,33 +1,23 @@
 #include <stdio.h>
 
+int linearsearch(int arr[], int SIZE, int key);
+
 int main() {
 
     //INITIALIZING USEFUL VARIABLES
-    int n;
-    int SIZE = (int)malloc(n * sizeof(int));
-    int arr[SIZE];
+    const int SIZE = 6;
+    int arr[] = {2, 4, 6, 7, 9, 3};
     int key;
-    int number;
-
-    //DYNAMIC ARRAY SIZING
-    printf("Enter number of elements in array: ");
-    scanf("%d", &n);
-
-    //ADDS NUMBERS TO ARRAY
-    printf("Enter integer elements in array:" );
-    for(int i = 0; i < SIZE; i++) {
-        scanf("%d", arr[i]);
-    }
 
     //ASSIGNS THE RETURNED VALUES FROM LINEARSEARCH FUNCTION TO RESULT VARIABLE
-    int result[] = linearsearch(arr[SIZE], SIZE, key);
+    int result = linearsearch(arr, SIZE, key);
 
     //PRINT OUT ARRAY
     for(int i = 0; i < SIZE; i++) {
-        printf("%d, ", number);
+        printf("%d, ", arr[i]);
     }
 
-    if(linearsearch == 0) {
+    if(result == 0) {
         printf("Key value %d found!", key);
     }
     else {
@@ -38,16 +28,15 @@ int main() {
     }
 
 int linearsearch(int arr[], int SIZE, int key) {
-int arr[SIZE];
-int key;
 
-for(int i = 0; i < SIZE; i++) {
-scanf("%d", &key);
-if(arr[i] == key) {
-    return 0;
-}
-else {
-    return 1;
-}
-}
+    for(int i = 0; i < SIZE; i++) {
+        scanf("%d", &key);
+        if(arr[i] == key) {
+            return 0;
+        }
+        else {
+            return 1;
+        }   
+    }
+    return -1;
 }
