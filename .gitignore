@@ -1,3 +1,4 @@
 *.dSYM
 binarysearch
 linearsearch
+.vscode
