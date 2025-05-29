@@ -1,6 +1,4 @@
 *.dSYM
-binarysearch
-linearsearch
 .vscode
 .exec
 .exe
