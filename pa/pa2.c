@@ -35,6 +35,10 @@ int main() {
 }
 
 char* str_copy(const char* src) {
+    if(src == NULL) {
+        printf("Error: src is NULL\n");
+        return NULL;
+    }
     int n = 0; //Initializing n to 0
 
     while(src[n] != '\0') { //Counting number of chars in src string
@@ -42,6 +46,10 @@ char* str_copy(const char* src) {
     }
 
     char* dest_str = (char*)malloc(n + 1); //Allocating memory for number of chars in string + 1 for null terminator
+    if(dest_str == NULL) {
+        printf("Error: Memory Allocation Failed\n");
+        return NULL;
+    }
 
     for(int i = 0; i < n; i++) { //Assigning the chars from src to the destination string
         dest_str[i] = src[i];
@@ -52,12 +60,21 @@ char* str_copy(const char* src) {
 }
 
 char* str_concat(const char* s1, const char* s2) {
+    if(s1 == NULL || s2 == NULL) {
+        printf("Error: s1 or s2 is NULL\n");
+        return NULL;
+    }
+
     int n = 0, q = 0; //Setting n and q to zero for readability
 
     while(s1[n] != '\0') n++; //Counting number of characters in s1 and s2
     while(s2[q] != '\0') q++;
 
     char* final_str = (char*)malloc(n + q + 1); //Allocates memory enough for both n and q combined plus 1 for the null terminator
+    if(final_str == NULL) {
+        printf("Error: Memory Allocation Failed\n");
+        return NULL;
+    }
 
     for(int i = 0; i < n; i++) { //Assigning the characters from s1 to the final string
         final_str[i] = s1[i];
@@ -71,6 +88,11 @@ char* str_concat(const char* s1, const char* s2) {
 }
 
 int str_length(const char* s) {
+    if(s == NULL) {
+        printf("Error: NULL pointer\n");
+        return -1;
+    }
+
     int length = 0; //Setting length to zero
 
     while(s[length] != '\0') { //Counts the length by incrementing the length count by one every character read
@@ -81,6 +103,10 @@ int str_length(const char* s) {
 }
 
 int str_compare(const char* s1, const char* s2) {
+    if(s1 == NULL || s2 == NULL) {
+        printf("Error: s1 or s2 is NULL\n");
+        return -1;
+    }
     int i = 0;
 
     while(s1[i] != '\0' && s2[i] != '\0') { //Iterating through both strings to compare each letter until we hit the null terminator
