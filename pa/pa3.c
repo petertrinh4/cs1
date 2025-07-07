@@ -20,6 +20,7 @@ void remove_first_match(Hub** head, const char* keyword);
 void print_chain_reverse(Hub* head);
 int total_distance(Hub* head);
 void deleteList(Hub *head);
+void display_bottleneck(Hub* head);
 
 int main() {
     printf("=== ParcelTrack Delivery Chain Test ===\n\n");
@@ -36,7 +37,7 @@ int main() {
     printf("Total distance: %d km\n\n", total);
     // Test display_bottleneck
     // Uncomment the line below if bonus attempted
-    // display_bottleneck(chain);
+    display_bottleneck(chain);
     // Test search_hub
     Hub found = search_hub(chain, "lanta");
     if (strcmp(found.name,"None")) {
@@ -100,10 +101,10 @@ void insert_at_tail(Hub** head, const char* name, int distance, int hour) {
 void print_chain(Hub* head) {
     Hub* curr = head;
     while(curr->next != NULL) { //Prints each node every iteration
-        printf("[%s] - [%d]km, [%d]hours\n", curr->name, curr->distance, curr->hour);
+        printf("[%s] - [%d]km, [%d]h\n", curr->name, curr->distance, curr->hour);
         curr = curr->next;
     }
-        printf("[%s] - [%d]km, [%d]hours\n", curr->name, curr->distance, curr->hour);
+        printf("[%s] - [%d]km, [%d]h\n", curr->name, curr->distance, curr->hour);
 }
 
 Hub search_hub(Hub* head, const char* keyword) {
@@ -164,12 +165,36 @@ void print_chain_reverse(Hub* head) { //Prints the chain in reverse starting fro
     if(curr == NULL) return;
 
     print_chain_reverse(curr->next);
-    printf("[%s] - [%d]km, [%d]hours\n", curr->name, curr->distance, curr->hour);
+    printf("[%s] - [%d]km, [%d]h\n", curr->name, curr->distance, curr->hour);
 }
 
-/*void display_bottleneck(Hub* head) { //BONUS FUNCTION
+void display_bottleneck(Hub* head) { //BONUS FUNCTION
+    Hub* currPtr = head;
+    Hub* maxFirst = NULL;
+    Hub* maxLast = NULL;
 
-}*/
+    if(currPtr == NULL || currPtr->next == NULL) {
+        return;
+    }
+    int maxChange = -1;
+
+    while(currPtr->next != NULL) {
+        int change = currPtr->next->hour - currPtr->hour;
+        
+        if(change > maxChange) {
+            maxChange = change;
+            maxFirst = currPtr;
+            maxLast = currPtr->next;
+        }
+        currPtr = currPtr->next;
+    }
+    
+    if(maxFirst && maxLast) {
+        printf("[%s] - [%d]km, [%d]h\n", maxFirst->name, maxFirst->distance, maxFirst->hour);
+        printf("[%s] - [%d]km, [%d]h\n", maxLast->name, maxLast->distance, maxLast->hour);
+        printf("Bottleneck time: %d hours\n\n", maxLast->hour - maxFirst->hour);
+    }
+}
 
 void deleteList(Hub *head) {
     Hub* temp;
